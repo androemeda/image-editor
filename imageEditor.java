@@ -224,7 +224,6 @@ public class imageEditor{
 
                     case 6: System.out.print("enter length of pixel square: ");
                             int sideLength = sc.nextInt();
-                            //sc.nextLine();
                             BufferedImage blurred = blurr(inputImage , sideLength);
                             File blurredImage = new File("blurred.jpeg");
                             ImageIO.write(blurred , "jpeg" , blurredImage);
