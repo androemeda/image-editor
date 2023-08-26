@@ -9,6 +9,62 @@ import java.util.*;
 
 public class imageEditor{
 
+    static BufferedImage blurr(BufferedImage inputImage , int pixelCount){
+
+        int height = inputImage.getHeight();
+        int width = inputImage.getWidth();
+
+        BufferedImage outputImage = new BufferedImage(width , height , BufferedImage.TYPE_INT_RGB);
+
+        int rowStart=0;
+        int rowEnd = pixelCount-1;
+
+        while(rowEnd<height){
+
+            int columnStart = 0;
+            int columnEnd = pixelCount-1 ;
+
+            while(columnEnd<width){
+
+                int sumRed = 0;
+                int sumGreen = 0;
+                int sumBlue = 0;
+
+                for(int i=rowStart ; i<=rowEnd ; i++){
+                    for(int j=columnStart ; j<=columnEnd ; j++){
+
+                        Color pixel = new Color(inputImage.getRGB(j,i));
+
+                        sumRed += pixel.getRed();
+                        sumBlue += pixel.getBlue();
+                        sumGreen += pixel.getGreen();
+
+                    }
+                }
+
+                int avgRed = sumRed/(pixelCount*pixelCount);
+                int avgBlue = sumBlue/(pixelCount*pixelCount);
+                int avgGreen = sumGreen/(pixelCount*pixelCount);
+
+                Color newPixel = new Color(avgRed , avgGreen , avgBlue);
+
+                for(int i=rowStart ; i<=rowEnd ; i++){
+                    for(int j=columnStart ; j<=columnEnd ; j++){
+                        outputImage.setRGB(j , i , newPixel.getRGB() );
+                    }
+                }
+
+                columnStart+=pixelCount;
+                columnEnd+=pixelCount;
+            }
+
+            rowStart+=pixelCount;
+            rowEnd+=pixelCount;
+        }
+
+        return outputImage;
+    }
+
 
     static BufferedImage mirror(BufferedImage inputImage){
         int height = inputImage.getHeight();
@@ -114,11 +170,11 @@ public class imageEditor{
         while(iterate){
 
    
-           System.out.println("chose the operation you would like to perform on the image:\n\n1.convert to grey-scale\n2.change brightness\n3.rotate clockwise\n4.rotate anti-clockwise\n5.mirror\n6.exit.\n");
+           System.out.println("chose the operation you would like to perform on the image:\n\n1.convert to grey-scale\n2.change brightness\n3.rotate clockwise\n4.rotate anti-clockwise\n5.mirror\n6.blurr.\n7.exit\n");
            System.out.print("enter choice: ");
            int choice = sc.nextInt();
 
-           if(choice==6){
+           if(choice==7){
             break;
            }
 
@@ -165,6 +221,15 @@ public class imageEditor{
                            ImageIO.write(mirrored , "jpeg" , mirroredImage);
                            System.out.println("\ndone!\n");
                            break;
+
+                    case 6: System.out.print("enter length of pixel square: ");
+                            int sideLength = sc.nextInt();
+                            //sc.nextLine();
+                            BufferedImage blurred = blurr(inputImage , sideLength);
+                            File blurredImage = new File("blurred.jpeg");
+                            ImageIO.write(blurred , "jpeg" , blurredImage);
+                            System.out.println("\ndone!\n");
+                            break;
    
                    default: System.out.println("\nplease enter a valid option.\n");
                }
