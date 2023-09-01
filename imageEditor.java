@@ -314,7 +314,7 @@ public class imageEditor{
         while(iterate){
 
    
-           System.out.println("chose the operation you would like to perform on the image:\n\n1.convert to grey-scale\n2.change brightness\n3.rotate clockwise\n4.rotate anti-clockwise\n5.mirror\n6.blurr.\n7.exit\n");
+           System.out.println("chose the operation you would like to perform on the image:\n\n1.convert to grey-scale\n2.change brightness\n3.rotate clockwise\n4.rotate anti-clockwise\n5.mirror\n6.blurr.\n7.contrast\n8.crop to circle\n9.edge detection\n10.inversion\n11.pencil sketch\n12.exit\n");
            System.out.print("enter choice: ");
            int choice = sc.nextInt();
 
