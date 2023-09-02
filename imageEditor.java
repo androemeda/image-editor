@@ -2,10 +2,8 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.geom.AffineTransform;
 import java.io.File;
-import java.util.*;
+import java.util.Scanner; 
 
 public class imageEditor{
 
@@ -268,11 +266,8 @@ public class imageEditor{
                 Color newPixel = new Color(red , green , blue);
 
                 outputImage.setRGB(j,i,newPixel.getRGB());
-
-
             }
         }
-
         return outputImage;
     }
 
@@ -303,7 +298,6 @@ public class imageEditor{
 
         return outputImage;
     }
-
 
     public static void main(String[] args){
 
